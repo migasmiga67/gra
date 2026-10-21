@@ -7,17 +7,18 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <canvas id="game" aria-label="Arena battle royale"></canvas>
-  <header><a class="brand" href="./">D<span> / </span>DROPZONE</a><div class="live">● SOLO / OFFLINE</div><button id="sound" aria-label="Włącz dźwięk">DŹWIĘK: WYŁ.</button></header>
-  <div id="hud" hidden>
+  <canvas id="game" aria-label="Arena battle royale 3D"></canvas>
+  <header><a class="brand" href="./">D<span> / </span>DROPZONE</a><div class="live">● 3D / SOLO</div><button id="sound" aria-label="Włącz dźwięk">DŹWIĘK: WYŁ.</button></header>
+  <div id="outsideTint"></div><div id="hud" hidden><div id="crosshair">+</div><canvas id="minimap" width="140" height="140"></canvas>
     <div class="stats"><div><small>POZOSTAŁO</small><strong id="alive">24</strong></div><div><small>ELIMINACJE</small><strong id="kills">0</strong></div><div><small>STREFA ZA</small><strong id="timer">0:20</strong></div></div>
     <div class="zone" id="zone">BEZPIECZNA STREFA</div>
     <div class="bottom"><div class="health"><small id="healthText">ZDROWIE / 100</small><div class="track"><i id="healthBar"></i></div><small id="medkits">APTECZKI: 2 · [E] UŻYJ</small></div><div class="ammo"><small id="weapon">KARABIN</small><strong><span id="ammo">30</span><em> / ∞</em></strong><small id="reloadHint">[R] PRZEŁADUJ</small></div></div>
     <div class="hint">WASD ruch <b>·</b> MYSZ celowanie <b>·</b> LPM strzał <b>·</b> SHIFT sprint <b>·</b> ESC pauza</div>
   </div>
-  <main id="menu" class="overlay"><section class="intro"><div class="eyebrow">OSTATNI NA POLU WALKI</div><h1>DROP<span>ZONE<i>.</i></span></h1><p>24 zawodników. Jedna szansa.<br>Zdobądź wyposażenie i przetrwaj do końca.</p><button id="play" class="primary">WEJDŹ DO GRY <span>↗</span></button><div class="controls"><span><b>W A S D</b> RUCH</span><span><b>↖ / LPM</b> CELUJ I STRZELAJ</span><span><b>E</b> LECZENIE</span></div><div class="note">Gra solo z 23 botami · bez pobierania · bez logowania</div></section><div class="side-label">SEKTOR 07 / ZIELONA WYSPA</div></main>
+  <main id="menu" class="overlay"><section class="intro"><div class="eyebrow">OSTATNI NA POLU WALKI</div><h1>DROP<span>ZONE<i>.</i></span></h1><p>Battle royale 3D. Kamera zza pleców.<br>Zdobądź wyposażenie i przetrwaj do końca.</p><button id="play" class="primary">WEJDŹ DO GRY <span>↗</span></button><div class="controls"><span><b>W A S D</b> RUCH</span><span><b>↖ / LPM</b> CELUJ I STRZELAJ</span><span><b>E</b> LECZENIE</span></div><div class="note">Gra solo z 23 botami · bez pobierania · bez logowania</div></section><div class="side-label">SEKTOR 07 / ZIELONA WYSPA</div></main>
   <div id="result" class="overlay" hidden><section class="result-card"><div class="eyebrow" id="resultLabel">KONIEC ROZGRYWKI</div><h2 id="resultTitle">WYELIMINOWANO</h2><p id="resultStats"></p><button id="again" class="primary">ZAGRAJ PONOWNIE <span>↗</span></button></section></div>
   <div id="pause" class="overlay" hidden><section class="result-card"><div class="eyebrow">CHWILA ODDECHU</div><h2>PAUZA</h2><p>Wróć na arenę, gdy będziesz gotowy.</p><button id="resume" class="primary">WRÓĆ DO GRY <span>↗</span></button></section></div>
+  <script src="vendor/three.min.js"></script>
   <script src="game.js"></script>
 </body>
 </html>
