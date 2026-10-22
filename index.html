@@ -1,0 +1,2270 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#0d1019" />
+    <title>Lifemax — wyjdź po więcej</title>
+    <style>
+      /* 01. Motywy i fundamenty */
+      :root {
+        color-scheme: dark;
+        --bg: #0d1019;
+        --panel: #161b28;
+        --panel2: #1c2333;
+        --text: #f2f4fc;
+        --muted: #919bb4;
+        --line: #2a3247;
+        --lime: #ccff76;
+        --purple: #ac95ff;
+        --gold: #ffcf73;
+        --shadow: #0003;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font:
+          15px/1.5 system-ui,
+          -apple-system,
+          sans-serif;
+      }
+      button,
+      input,
+      textarea,
+      select {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+        color: inherit;
+      }
+      button:disabled {
+        opacity: 0.45;
+        cursor: default;
+      }
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible,
+      textarea:focus-visible {
+        outline: 3px solid var(--purple);
+        outline-offset: 4px;
+      }
+      button {
+        touch-action: manipulation;
+      }
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+      h1 {
+        font-size: 30px;
+        letter-spacing: -1.2px;
+        line-height: 1.2;
+      }
+      h2 {
+        font-size: 20px;
+        letter-spacing: -0.5px;
+      }
+      h3 {
+        font-size: 16px;
+      }
+      small,
+      .muted {
+        color: var(--muted);
+      }
+      small {
+        font-size: 12px;
+      }
+      .eyebrow {
+        font-size: 10px;
+        letter-spacing: 2px;
+        font-weight: 800;
+        color: var(--lime);
+      }
+      .shell {
+        max-width: 1060px;
+        margin: auto;
+        padding: 0 28px 120px;
+      }
+      header {
+        height: 88px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 30px;
+      }
+      .logo {
+        font-weight: 900;
+        font-size: 25px;
+        letter-spacing: -1px;
+      }
+      .logo b {
+        color: var(--lime);
+      }
+      .logo em {
+        font-size: 10px;
+        color: var(--muted);
+        font-style: normal;
+        letter-spacing: 2px;
+        display: block;
+      }
+      .top-right {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .chip {
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        padding: 8px 13px;
+        font-size: 12px;
+        background: var(--panel);
+      }
+      .avatar {
+        height: 38px;
+        width: 38px;
+        border-radius: 13px;
+        display: grid;
+        place-items: center;
+        background: var(--lime);
+        color: #1b2b12;
+        font-weight: 900;
+      }
+      .heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 25px 0 22px;
+        gap: 16px;
+      }
+      .heading p {
+        margin-top: 7px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .pill {
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        border-radius: 6px;
+        padding: 5px 8px;
+        background: #a995ff18;
+        color: var(--purple);
+        white-space: nowrap;
+      }
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 23px;
+      }
+      .hero {
+        position: relative;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 20px;
+        background:
+          radial-gradient(ellipse at 90% 40%, #9e79ef22, transparent 55%),
+          var(--panel);
+      }
+      .hero:after {
+        content: "✦";
+        position: absolute;
+        right: 30px;
+        top: -26px;
+        font-size: 185px;
+        color: #a995ff0b;
+        pointer-events: none;
+      }
+      .hero h2 {
+        margin: 9px 0 4px;
+        font-size: 25px;
+      }
+      .hero .xp-num {
+        font-weight: 800;
+        font-size: 30px;
+        letter-spacing: -1px;
+        text-align: right;
+      }
+      .progress {
+        height: 7px;
+        border-radius: 9px;
+        background: var(--line);
+        overflow: hidden;
+        margin: 17px 0 9px;
+      }
+      .progress i {
+        height: 100%;
+        display: block;
+        background: linear-gradient(90deg, var(--purple), var(--lime));
+        border-radius: 9px;
+        transition: width 0.5s;
+      }
+      .spread {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+      }
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin: 14px 0 28px;
+      }
+      .stat {
+        padding: 17px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+      }
+      .stat strong {
+        display: block;
+        font-size: 24px;
+      }
+      .stat small {
+        font-size: 11px;
+      }
+      .section-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin: 24px 0 15px;
+      }
+      .ghost {
+        background: none;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 11px 14px;
+        min-height: 44px;
+        font-size: 12px;
+      }
+      .ghost:hover {
+        background: var(--panel2);
+      }
+      .primary {
+        background: var(--lime);
+        border: 0;
+        border-radius: 12px;
+        min-height: 48px;
+        padding: 12px 20px;
+        color: #233116;
+        font-weight: 800;
+      }
+      .primary:hover {
+        filter: brightness(1.08);
+      }
+      .missions {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+      }
+      .mission {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-height: 280px;
+        transition:
+          transform 0.2s,
+          border-color 0.2s;
+      }
+      .mission:hover {
+        transform: translateY(-3px);
+        border-color: #6f688d;
+      }
+      .mission .icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 13px;
+        display: grid;
+        place-items: center;
+        font-size: 24px;
+        background: var(--panel2);
+        margin-bottom: 20px;
+      }
+      .mission .difficulty {
+        position: absolute;
+        right: 20px;
+        top: 25px;
+        font-size: 10px;
+        letter-spacing: 1px;
+        font-weight: 800;
+      }
+      .mission h3 {
+        font-size: 18px;
+        margin: 7px 0 10px;
+        line-height: 1.35;
+      }
+      .mission p {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 20px;
+      }
+      .mission footer {
+        margin-top: auto;
+      }
+      .complete {
+        border: 1px solid #ccff7644;
+        background: #ccff7608;
+      }
+      .complete .primary {
+        background: var(--panel2);
+        color: var(--lime);
+      }
+      .mission.done-animation {
+        animation: complete 0.6s;
+      }
+      .category {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--muted);
+      }
+      .reward {
+        display: flex;
+        justify-content: space-between;
+        margin: 4px 0 18px;
+        font-size: 12px;
+      }
+      .reward b {
+        color: var(--lime);
+      }
+      .mission button {
+        width: 100%;
+      }
+      .daily-note {
+        font-size: 12px;
+        color: var(--muted);
+        text-align: center;
+        margin: 18px 0;
+      }
+      .chest-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .chest-symbol {
+        font-size: 38px;
+      }
+      .chest-row .primary {
+        margin-left: auto;
+      }
+      .chests {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .chests button {
+        background: var(--panel2);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 12px;
+        min-height: 48px;
+      }
+      .inventory-tools {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .inventory-tools select {
+        background: var(--panel);
+        color: var(--text);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 10px;
+        min-height: 44px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px;
+      }
+      .item {
+        --rarity: #9ba7bc;
+        position: relative;
+        min-height: 146px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--panel);
+        padding: 16px 9px;
+        text-align: center;
+        overflow: hidden;
+      }
+      .item.owned {
+        border-color: color-mix(in srgb, var(--rarity) 45%, var(--line));
+        background:
+          radial-gradient(
+            ellipse at top,
+            color-mix(in srgb, var(--rarity) 10%, transparent),
+            transparent 80%
+          ),
+          var(--panel);
+        box-shadow: inset 0 0 25px
+          color-mix(in srgb, var(--rarity) 5%, transparent);
+      }
+      .item .art {
+        font-size: 35px;
+        display: block;
+        margin-bottom: 10px;
+        filter: drop-shadow(
+          0 0 10px color-mix(in srgb, var(--rarity) 35%, transparent)
+        );
+      }
+      .item .name {
+        font-size: 11px;
+        font-weight: 700;
+        display: block;
+        line-height: 1.3;
+        min-height: 29px;
+      }
+      .item .rarity {
+        display: block;
+        font-size: 9px;
+        color: var(--rarity);
+        margin-top: 7px;
+      }
+      .item.locked .art {
+        filter: grayscale(1) brightness(0.25);
+        opacity: 0.5;
+      }
+      .item.locked .name {
+        color: var(--muted);
+      }
+      .mythic.owned:after {
+        content: "";
+        position: absolute;
+        inset: -100%;
+        background: linear-gradient(
+          110deg,
+          transparent 40%,
+          #ee74ff25,
+          #80f7ff20,
+          #fff78a25,
+          transparent 60%
+        );
+        animation: shimmer 5s linear infinite;
+        pointer-events: none;
+      }
+      .set-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 18px;
+      }
+      .set-card {
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        background: var(--panel);
+      }
+      .set-card p {
+        font-size: 12px;
+        color: var(--muted);
+        margin: 5px 0;
+      }
+      .set-card .progress {
+        margin: 10px 0 0;
+        height: 4px;
+      }
+      .badges {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .badge {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        padding: 18px;
+        border-radius: 15px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+      .badge > span {
+        font-size: 27px;
+      }
+      .badge:not(.earned) > span {
+        filter: grayscale(1);
+        opacity: 0.35;
+      }
+      .badge small {
+        display: block;
+        font-size: 11px;
+        margin-top: 4px;
+      }
+      .badge.earned {
+        border-color: #ffcf7344;
+      }
+      .badge b {
+        font-size: 12px;
+      }
+      .map-wrap {
+        background:
+          radial-gradient(ellipse, #ac95ff0d, transparent), var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 12px;
+      }
+      .map-wrap svg {
+        display: block;
+        width: 100%;
+        max-height: 470px;
+        touch-action: manipulation;
+      }
+      .hex {
+        cursor: pointer;
+        stroke: var(--bg);
+        stroke-width: 3;
+        fill: var(--panel2);
+      }
+      .hex.revealed {
+        fill: #648c54;
+        stroke: #b6f67555;
+      }
+      .hex.selected {
+        stroke: var(--gold);
+        stroke-width: 4;
+      }
+      .hex:focus {
+        stroke: var(--purple);
+        outline: none;
+      }
+      .map-detail {
+        margin-top: 14px;
+      }
+      .map-detail label {
+        display: block;
+        font-size: 12px;
+        color: var(--muted);
+        margin: 14px 0 6px;
+      }
+      input,
+      textarea {
+        background: var(--bg);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        color: var(--text);
+        padding: 12px;
+        width: 100%;
+        min-height: 46px;
+      }
+      textarea {
+        resize: vertical;
+        min-height: 90px;
+      }
+      .map-detail button {
+        margin-top: 12px;
+      }
+      .flex-card {
+        position: relative;
+        max-width: 580px;
+        margin: 0 auto;
+        padding: 30px;
+        background:
+          radial-gradient(ellipse at 95% 0, #ac95ff25, transparent 65%),
+          linear-gradient(145deg, #1e2739, #111722);
+        border: 1px solid #6b5f894d;
+        border-radius: 24px;
+        color: #f2f4fc;
+        overflow: hidden;
+        box-shadow: 0 20px 60px #0002;
+      }
+      .flex-card .muted,
+      .flex-card small {
+        color: #99a8c3;
+      }
+      .flex-card .avatar {
+        width: 62px;
+        height: 62px;
+        font-size: 25px;
+        border-radius: 20px;
+      }
+      .profile-name {
+        font-size: 25px;
+        letter-spacing: -1px;
+      }
+      .rank {
+        font-size: 11px;
+        font-weight: 800;
+      }
+      .cp-display {
+        font-size: 68px;
+        font-weight: 900;
+        letter-spacing: -4px;
+        line-height: 1.1;
+        margin-top: 24px;
+      }
+      .cp-display span {
+        font-size: 16px;
+        letter-spacing: 0;
+        color: #9eacc6;
+      }
+      .flex-stats {
+        display: flex;
+        gap: 25px;
+        border-bottom: 1px solid #ffffff18;
+        padding: 20px 0;
+        margin-bottom: 20px;
+      }
+      .flex-stats b {
+        display: block;
+        font-size: 20px;
+      }
+      .showcase {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin: 12px 0 25px;
+      }
+      .showcase .item {
+        min-height: 125px;
+        background: #ffffff04;
+        border-color: #ffffff20;
+        color: #f2f4fc;
+      }
+      .showcase .empty {
+        display: grid;
+        place-items: center;
+        font-size: 28px;
+        color: #6e7e9d;
+      }
+      .profile-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin: 20px 0;
+      }
+      .edit-panel {
+        max-width: 580px;
+        margin: 18px auto;
+      }
+      .choose-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      .choose-grid button {
+        font-size: 25px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--panel2);
+        padding: 10px;
+        min-width: 48px;
+        min-height: 48px;
+      }
+      .choose-grid button.selected {
+        border-color: var(--lime);
+        background: #ccff7615;
+      }
+      .danger-button {
+        color: #ff9eac;
+        border-color: #ff9eac40;
+      }
+      .nav {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(610px, calc(100% - 24px));
+        background: color-mix(in srgb, var(--panel) 94%, transparent);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        display: flex;
+        padding: 8px;
+        z-index: 20;
+        box-shadow: 0 15px 45px #0005;
+        backdrop-filter: blur(16px);
+      }
+      .nav button {
+        flex: 1;
+        border: 0;
+        background: none;
+        color: var(--muted);
+        font-size: 10px;
+        border-radius: 13px;
+        padding: 8px 3px;
+        min-height: 56px;
+      }
+      .nav button span {
+        font-size: 21px;
+        display: block;
+        line-height: 1.3;
+        margin-bottom: 4px;
+      }
+      .nav button.active {
+        background: #ac95ff15;
+        color: var(--purple);
+      }
+      .toast {
+        position: fixed;
+        bottom: 110px;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: calc(100% - 30px);
+        width: max-content;
+        background: var(--text);
+        color: var(--bg);
+        padding: 13px 20px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 700;
+        z-index: 100;
+        box-shadow: 0 10px 35px #0004;
+      }
+      dialog {
+        width: min(440px, calc(100% - 30px));
+        color: var(--text);
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 28px;
+        max-height: 85dvh;
+        overflow: auto;
+      }
+      dialog::backdrop {
+        background: #060914ce;
+        backdrop-filter: blur(8px);
+      }
+      .dialog-close {
+        float: right;
+        background: var(--panel2);
+        border: 0;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        font-size: 23px;
+      }
+      .loot-modal {
+        text-align: center;
+      }
+      .loot-modal h2 {
+        margin: 20px 0 8px;
+      }
+      .loot-art {
+        font-size: 85px;
+        margin: 25px 0;
+        filter: drop-shadow(0 0 24px var(--rarity, #ffcf7366));
+      }
+      .loot-art.shake {
+        animation: shake 0.12s infinite;
+      }
+      .loot-art.flash {
+        animation: flash 0.6s;
+      }
+      .loot-modal .primary {
+        width: 100%;
+        margin-top: 22px;
+      }
+      .odds {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 14px;
+        line-height: 1.8;
+      }
+      .confetti {
+        position: fixed;
+        pointer-events: none;
+        width: 8px;
+        height: 13px;
+        top: -20px;
+        z-index: 200;
+        animation: fall 1.5s ease-in forwards;
+      }
+      .storage-warning {
+        background: #ffcf7318;
+        border: 1px solid #ffcf7355;
+        border-radius: 12px;
+        padding: 12px;
+        color: var(--gold);
+        font-size: 12px;
+        margin-bottom: 18px;
+      }
+      .footer-note {
+        text-align: center;
+        color: var(--muted);
+        font-size: 10px;
+        letter-spacing: 1px;
+        margin: 30px 0;
+      }
+      .help {
+        margin: 30px 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .help summary {
+        cursor: pointer;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+      }
+      .help p {
+        margin: 10px 0;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @keyframes shake {
+        0%,
+        100% {
+          transform: rotate(-7deg) translateX(-4px);
+        }
+        50% {
+          transform: rotate(7deg) translateX(4px);
+        }
+      }
+      @keyframes flash {
+        0% {
+          transform: scale(0.5);
+          filter: brightness(4);
+        }
+        70% {
+          transform: scale(1.15);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      @keyframes complete {
+        50% {
+          box-shadow: 0 0 40px #ccff7644;
+        }
+      }
+      @keyframes shimmer {
+        from {
+          transform: translateX(-30%) rotate(15deg);
+        }
+        to {
+          transform: translateX(30%) rotate(15deg);
+        }
+      }
+      @keyframes fall {
+        to {
+          transform: translate(var(--dx), 105vh) rotate(600deg);
+          opacity: 0;
+        }
+      }
+      /* 02. Responsywność i jasny motyw */
+      @media (prefers-color-scheme: light) {
+        :root {
+          color-scheme: light;
+          --bg: #f4f5fa;
+          --panel: #fff;
+          --panel2: #edf0f7;
+          --text: #20283d;
+          --muted: #68748c;
+          --line: #dce1ec;
+          --lime: #528b20;
+          --purple: #7454c2;
+          --gold: #9a6917;
+        }
+        .primary {
+          background: #cdf88e;
+          color: #233116;
+        }
+        .hex.revealed {
+          fill: #a1c788;
+        }
+        .nav button.active {
+          background: #ac95ff20;
+        }
+        .eyebrow {
+          color: #6b4cba;
+        }
+        .flex-card .eyebrow {
+          color: #ccff76;
+        }
+        .toast {
+          background: #25314b;
+          color: white;
+        }
+      }
+      @media (max-width: 700px) {
+        .shell {
+          padding: 0 18px 110px;
+        }
+        header {
+          height: 76px;
+          margin-bottom: 23px;
+        }
+        .logo {
+          font-size: 24px;
+        }
+        .heading {
+          margin-top: 18px;
+        }
+        h1 {
+          font-size: 26px;
+        }
+        .missions {
+          grid-template-columns: 1fr;
+        }
+        .mission {
+          min-height: 0;
+          padding: 20px;
+        }
+        .mission .icon {
+          float: left;
+          margin-bottom: 12px;
+        }
+        .mission h3 {
+          font-size: 18px;
+        }
+        .mission footer {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+        }
+        .reward {
+          flex: 1;
+          margin: 0;
+          flex-direction: column;
+          gap: 3px;
+        }
+        .mission button {
+          width: auto;
+          min-width: 130px;
+        }
+        .mission p {
+          margin-bottom: 20px;
+        }
+        .stats-row {
+          gap: 8px;
+          margin-bottom: 22px;
+        }
+        .stat {
+          padding: 13px 11px;
+        }
+        .stat strong {
+          font-size: 21px;
+        }
+        .stat small {
+          font-size: 10px;
+        }
+        .hero {
+          padding: 20px;
+        }
+        .hero h2 {
+          font-size: 22px;
+        }
+        .hero .xp-num {
+          font-size: 25px;
+        }
+        .grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 9px;
+        }
+        .item {
+          padding: 14px 6px;
+          min-height: 141px;
+        }
+        .set-list {
+          grid-template-columns: 1fr;
+        }
+        .badges {
+          grid-template-columns: 1fr 1fr;
+          gap: 9px;
+        }
+        .badge {
+          padding: 14px 10px;
+          gap: 8px;
+          align-items: start;
+        }
+        .badge > span {
+          font-size: 22px;
+        }
+        .badge b {
+          font-size: 11px;
+        }
+        .badge small {
+          font-size: 10px;
+        }
+        .chest-row {
+          gap: 10px;
+        }
+        .chest-row h3 {
+          font-size: 14px;
+        }
+        .chest-row .primary {
+          padding: 12px;
+          font-size: 12px;
+        }
+        .chest-symbol {
+          font-size: 29px;
+        }
+        .flex-card {
+          padding: 23px;
+        }
+        .cp-display {
+          font-size: 60px;
+        }
+        .flex-stats {
+          gap: 23px;
+        }
+        .profile-actions {
+          flex-wrap: wrap;
+        }
+        .nav {
+          bottom: max(10px, env(safe-area-inset-bottom));
+        }
+        .section-title h2 {
+          font-size: 18px;
+        }
+        .section-title .ghost {
+          font-size: 10px;
+          padding: 9px;
+        }
+        .top-right .chip {
+          font-size: 10px;
+        }
+        .map-wrap {
+          padding: 4px;
+        }
+        .profile-name {
+          font-size: 22px;
+        }
+        .heading > .pill {
+          display: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *:before,
+        *:after {
+          animation: none !important;
+          transition: none !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header>
+        <div class="logo">life<b>max</b><em>ŻYCIE TO TWÓJ OPEN WORLD</em></div>
+        <div class="top-right">
+          <span class="chip" id="headerStreak">🔥 0 dni</span
+          ><button class="avatar" id="avatar" aria-label="Przejdź do profilu">
+            L
+          </button>
+        </div>
+      </header>
+      <div id="storageWarning" class="storage-warning" hidden role="status">
+        Zapis w pamięci przeglądarki jest niedostępny. Możesz grać, ale postępy
+        tej sesji mogą zniknąć po zamknięciu strony.
+      </div>
+      <main id="content"></main>
+      <div class="footer-note">MNIEJ SCROLLOWANIA. WIĘCEJ HISTORII.</div>
+    </div>
+    <nav class="nav" aria-label="Nawigacja główna">
+      <button data-tab="missions" class="active"><span>⚡</span>Misje</button
+      ><button data-tab="map"><span>⬡</span>Mapa</button
+      ><button data-tab="collection"><span>◈</span>Kolekcja</button
+      ><button data-tab="badges"><span>✹</span>Odznaki</button
+      ><button data-tab="profile"><span>♙</span>Profil</button>
+    </nav>
+    <dialog id="modal"></dialog>
+    <div id="toast" class="toast" role="status" hidden></div>
+    <script>
+      "use strict";
+      /* 03. Dane: misje (po 16 na poziom; razem 48) */
+      const CATEGORIES = ["Towarzyskie", "Eksploracja", "Kreatywne", "Odwaga"];
+      const MISSION_TEXTS = [
+        [
+          ["Napisz do dawnego znajomego", "Zapytaj, co u niego słychać."],
+          ["Powiedz komuś coś miłego", "Zauważ coś konkretnego, co doceniasz."],
+          ["Podziękuj za drobiazg", "Wyślij krótką, szczerą wiadomość."],
+          [
+            "Zapytaj o ulubioną piosenkę",
+            "Posłuchaj propozycji drugiej osoby.",
+          ],
+          ["Wybierz inną ulicę", "Zmień fragment swojej zwykłej trasy."],
+          [
+            "Znajdź coś zielonego",
+            "Spędź 5 minut przy drzewach lub roślinach.",
+          ],
+          ["Zobacz niebo", "Wyjdź na 5 minut i przyjrzyj się chmurom."],
+          ["Odkryj mały detal", "Znajdź ciekawy ornament na budynku."],
+          ["Narysuj swój dzień", "Zrób szkic w 3 minuty, bez oceniania."],
+          ["Zrób zdjęcie koloru", "Znajdź kadr z jednym dominującym kolorem."],
+          ["Wymyśl tytuł rozdziału", "Zapisz tytuł dzisiejszego dnia."],
+          ["Ułóż mikrohistorię", "Napisz opowieść z dokładnie 6 słów."],
+          ["Zadaj jedno pytanie", "Zapytaj o coś, co naprawdę Cię ciekawi."],
+          ["Spróbuj nowego smaku", "Wybierz bezpieczny dla siebie produkt."],
+          [
+            "Zrób rzecz odkładaną od wczoraj",
+            "Poświęć jej przynajmniej 5 minut.",
+          ],
+          ["Powiedz swoje zdanie", "Wyraź spokojnie własną opinię."],
+        ],
+        [
+          [
+            "Zadzwoń zamiast pisać",
+            "Porozmawiaj z bliską osobą przez 10 minut.",
+          ],
+          [
+            "Zaproś kogoś na spacer",
+            "Ustal konkretny termin krótkiego spotkania.",
+          ],
+          [
+            "Wysłuchaj czyjejś historii",
+            "Przez 15 minut słuchaj bez przerywania.",
+          ],
+          ["Pomóż w małej sprawie", "Zaproponuj znajomemu konkretną pomoc."],
+          ["Odkryj nowy park", "Odwiedź miejsce zielone, którego nie znasz."],
+          ["Spacer bez słuchawek", "Przez 20 minut słuchaj otoczenia."],
+          ["Znajdź lokalną historię", "Odszukaj tablicę lub opis zabytku."],
+          ["Zajrzyj do biblioteki", "Odkryj półkę z nieznanym Ci tematem."],
+          ["Zrób serię 5 zdjęć", "Opowiedz zdjęciami o swojej okolicy."],
+          ["Napisz krótki wiersz", "Stwórz minimum 8 wersów o czymś zwykłym."],
+          ["Stwórz coś z papieru", "Origami, kolaż lub własna mała forma."],
+          [
+            "Ugotuj coś nowego",
+            "Wypróbuj prosty przepis z dostępnych składników.",
+          ],
+          [
+            "Zaproponuj własny pomysł",
+            "Przedstaw znajomym pomysł na wspólne działanie.",
+          ],
+          [
+            "Postaw spokojną granicę",
+            "Uprzejmie odmów czegoś, na co nie masz przestrzeni.",
+          ],
+          [
+            "Zrób pierwszy krok",
+            "Napisz do osoby, z którą chcesz odnowić kontakt.",
+          ],
+          [
+            "Pokaż komuś swoją pracę",
+            "Podziel się szkicem, zdjęciem lub pomysłem.",
+          ],
+        ],
+        [
+          [
+            "Zorganizuj małe spotkanie",
+            "Zaproś co najmniej dwie osoby i ustal plan.",
+          ],
+          [
+            "Zrób dobry uczynek",
+            "Poświęć 45 minut na pomoc za zgodą drugiej osoby.",
+          ],
+          ["Wspólna przygoda", "Zaproś kogoś na godzinę bez telefonów."],
+          [
+            "Naucz kogoś umiejętności",
+            "Przeprowadź krótką, półgodzinną lekcję.",
+          ],
+          [
+            "Godzina nowej trasy",
+            "Zaplanuj bezpieczny spacer w nieznanej okolicy.",
+          ],
+          [
+            "Wyprawa o poranku",
+            "Odwiedź bezpieczne miejsce i obserwuj początek dnia.",
+          ],
+          [
+            "Poznaj wystawę",
+            "Odwiedź muzeum lub bezpłatną lokalną ekspozycję.",
+          ],
+          [
+            "Zaplanuj mikroekspedycję",
+            "Odkryj trzy nowe publiczne miejsca w jeden dzień.",
+          ],
+          ["Stwórz mały projekt", "Poświęć godzinę na własny twórczy pomysł."],
+          [
+            "Nagraj swoją opowieść",
+            "Przygotuj i nagraj 3-minutową historię dla siebie.",
+          ],
+          [
+            "Stwórz prezent od serca",
+            "Zrób coś własnoręcznie dla bliskiej osoby.",
+          ],
+          [
+            "Napisz pierwszy rozdział",
+            "Napisz 500 słów historii, która chodzi Ci po głowie.",
+          ],
+          [
+            "Dołącz do wydarzenia",
+            "Weź udział w otwartym, bezpiecznym spotkaniu.",
+          ],
+          [
+            "Spróbuj nowych zajęć",
+            "Zapisz się i weź udział w zajęciach próbnych.",
+          ],
+          [
+            "Porozmawiaj o ważnej sprawie",
+            "Spokojnie rozpocznij odkładaną rozmowę.",
+          ],
+          [
+            "Podejmij własne wyzwanie",
+            "Przeznacz godzinę na naukę czegoś, czego unikasz.",
+          ],
+        ],
+      ];
+      const MISSIONS = MISSION_TEXTS.flatMap((rows, d) =>
+        rows.map((r, i) => ({
+          id: `m${d}-${i}`,
+          difficulty: d,
+          category: CATEGORIES[Math.floor(i / 4)],
+          title: r[0],
+          description: r[1],
+          xp: [10, 25, 50][d],
+        })),
+      );
+      /* 04. Przedmioty: 6 zestawów × 5 rzadkości = 30 */
+      const RARITIES = [
+        { name: "Zwykły", value: 5, color: "#9ba7bc" },
+        { name: "Rzadki", value: 20, color: "#72b7ff" },
+        { name: "Epicki", value: 60, color: "#b995ff" },
+        { name: "Legendarny", value: 200, color: "#ffcc70" },
+        { name: "Mityczny", value: 500, color: "#f3a5ee" },
+      ];
+      const SETS = [
+        { id: "night", name: "Nocnego Marka", icon: "🌙", bonus: 350 },
+        { id: "wander", name: "Zbłąkanego Wędrowca", icon: "🧭", bonus: 350 },
+        { id: "social", name: "Mistrza Relacji", icon: "💬", bonus: 350 },
+        { id: "create", name: "Twórczego Ducha", icon: "🎨", bonus: 350 },
+        { id: "brave", name: "Nieustraszonego", icon: "🔥", bonus: 350 },
+        { id: "life", name: "Lifemaxera", icon: "✦", bonus: 500 },
+      ];
+      const ITEM_ROWS = [
+        [
+          [
+            "Bilet o Północy",
+            "🎫",
+            "Ostatni kurs bywa początkiem najlepszej historii.",
+          ],
+          [
+            "Mapa Gwiazdozbiorów",
+            "🌌",
+            "Pokazuje ścieżki widoczne tylko po zmroku.",
+          ],
+          [
+            "Latarnia Nocnego Marka",
+            "🏮",
+            "Jej światło przyciąga niespodziewane przygody.",
+          ],
+          [
+            "Księżycowy Zegarek",
+            "⌚",
+            "Odlicza chwile, które warto zapamiętać.",
+          ],
+          ["Serce Nocy", "🌑", "Zamknięte w nim niebo nigdy nie zasypia."],
+        ],
+        [
+          ["Kamień z Drogi", "🪨", "Zwykły kamień z niezwykłego początku."],
+          [
+            "Kompas Zbłąkanego",
+            "🧭",
+            "Nie wskazuje północy. Wskazuje ciekawość.",
+          ],
+          ["Buty Dalekich Tras", "🥾", "Każda rysa opowiada o nowym szlaku."],
+          [
+            "Atlas Nieznanego",
+            "🗺️",
+            "Na jego pustych kartach rosną Twoje wspomnienia.",
+          ],
+          [
+            "Klucz Horyzontu",
+            "🗝️",
+            "Otwiera drzwi, których inni jeszcze nie dostrzegają.",
+          ],
+        ],
+        [
+          [
+            "Kartka z Pozdrowieniami",
+            "💌",
+            "Kilka słów potrafi skrócić najdłuższą odległość.",
+          ],
+          [
+            "Bransoletka Przyjaźni",
+            "🧵",
+            "Splot, którego nie rozplącze upływ czasu.",
+          ],
+          [
+            "Telefon Dobrych Wieści",
+            "☎️",
+            "Zawsze dzwoni dokładnie w dobrym momencie.",
+          ],
+          [
+            "Puchar Wspólnych Chwil",
+            "🏆",
+            "Pełen historii opowiadanych przy jednym stole.",
+          ],
+          ["Nić Przeznaczenia", "🪢", "Łączy ludzi, którzy mieli się spotkać."],
+        ],
+        [
+          [
+            "Ołówek Początku",
+            "✏️",
+            "Każde arcydzieło zaczynało się od kreski.",
+          ],
+          [
+            "Szkicownik Pomysłów",
+            "📓",
+            "Nigdy nie kończą się w nim czyste strony.",
+          ],
+          [
+            "Pędzel Wyobraźni",
+            "🖌️",
+            "Maluje kolory, których jeszcze nikt nie nazwał.",
+          ],
+          ["Aparat Wspomnień", "📸", "Utrwala to, co znika w mgnieniu oka."],
+          [
+            "Iskra Stworzenia",
+            "💎",
+            "Mały fragment pierwszego pomysłu świata.",
+          ],
+        ],
+        [
+          [
+            "Guzik Odwagi",
+            "🔘",
+            "Przypomina, że można zacząć od małego kroku.",
+          ],
+          [
+            "Rękawica Pierwszego Kroku",
+            "🧤",
+            "Pewnie trzyma nawet najbardziej nieśmiałe plany.",
+          ],
+          ["Tarcza Własnego Zdania", "🛡️", "Chroni prawo do bycia sobą."],
+          [
+            "Medal Przełamania",
+            "🏅",
+            "Wybity z rzeczy, które kiedyś wydawały się niemożliwe.",
+          ],
+          [
+            "Płomień Nieustraszonego",
+            "🔥",
+            "Nie gaśnie nawet po najtrudniejszym dniu.",
+          ],
+        ],
+        [
+          [
+            "Żeton Nowego Dnia",
+            "🪙",
+            "Możesz zacząć jeszcze raz. Właśnie teraz.",
+          ],
+          [
+            "Okulary Możliwości",
+            "🕶️",
+            "W zwyczajnym dniu pokazują ukryte sidequesty.",
+          ],
+          ["Peleryna Odkrywcy", "🦸", "Uszyta z chwil poza strefą komfortu."],
+          ["Sygnet Legendy", "💍", "Znak tych, którzy wybierają własną drogę."],
+          [
+            "Korona Lifemaxera",
+            "👑",
+            "Nie rządzi światem. Rządzi własnym życiem.",
+          ],
+        ],
+      ];
+      const ITEMS = ITEM_ROWS.flatMap((rows, s) =>
+        rows.map((r, rarity) => ({
+          id: `i${s}-${rarity}`,
+          set: SETS[s].id,
+          rarity,
+          name: r[0],
+          icon: r[1],
+          lore: r[2],
+        })),
+      );
+      const CHESTS = [
+        {
+          name: "Drewniana",
+          icon: "📦",
+          cost: 20,
+          odds: [65, 25, 8, 1.8, 0.2],
+        },
+        { name: "Srebrna", icon: "🧰", cost: 45, odds: [35, 40, 18, 6, 1] },
+        { name: "Złota", icon: "👑", cost: 80, odds: [10, 35, 32, 20, 3] },
+      ];
+      const LEVELS = [
+        { name: "Spacerowicz", xp: 0 },
+        { name: "Włóczęga", xp: 100 },
+        { name: "Tropiciel", xp: 300 },
+        { name: "Odkrywca", xp: 700 },
+        { name: "Legenda", xp: 1400 },
+        { name: "Lifemaxer", xp: 2500 },
+      ];
+      const RANKS = [
+        { name: "Brąz", cp: 0, color: "#cf9d7a" },
+        { name: "Srebro", cp: 300, color: "#bac9df" },
+        { name: "Złoto", cp: 1000, color: "#ffcf73" },
+        { name: "Diament", cp: 2500, color: "#7fe5f0" },
+        { name: "Mityczny", cp: 5000, color: "#e8a3ff" },
+      ];
+      /* 05. Odznaki — warunki są funkcjami, bonus naliczany raz */
+      const BADGES = [
+        {
+          id: "first",
+          name: "Pierwszy krok",
+          icon: "👟",
+          hint: "Zalicz pierwszą misję.",
+          bonus: 15,
+          test: (s) => s.completed >= 1,
+        },
+        {
+          id: "five",
+          name: "Łapię rytm",
+          icon: "⚡",
+          hint: "Zalicz 5 misji.",
+          bonus: 25,
+          test: (s) => s.completed >= 5,
+        },
+        {
+          id: "ten",
+          name: "Sidequester",
+          icon: "🎯",
+          hint: "Zalicz 10 misji.",
+          bonus: 40,
+          test: (s) => s.completed >= 10,
+        },
+        {
+          id: "thirty",
+          name: "Żyję na maksa",
+          icon: "🚀",
+          hint: "Zalicz 30 misji.",
+          bonus: 100,
+          test: (s) => s.completed >= 30,
+        },
+        {
+          id: "streak3",
+          name: "Trzy iskry",
+          icon: "🔥",
+          hint: "Osiągnij serię 3 dni.",
+          bonus: 30,
+          test: (s) => s.bestStreak >= 3,
+        },
+        {
+          id: "streak7",
+          name: "Tydzień ognia",
+          icon: "🌋",
+          hint: "Osiągnij serię 7 dni.",
+          bonus: 100,
+          test: (s) => s.bestStreak >= 7,
+        },
+        {
+          id: "day",
+          name: "Idealny dzień",
+          icon: "☀️",
+          hint: "Ukończ wszystkie 3 misje dnia.",
+          bonus: 35,
+          test: (s) => s.perfectDays >= 1,
+        },
+        {
+          id: "hard",
+          name: "Bez wymówek",
+          icon: "🦁",
+          hint: "Zalicz trudną misję.",
+          bonus: 25,
+          test: (s) => s.hard >= 1,
+        },
+        {
+          id: "explore",
+          name: "Nowe horyzonty",
+          icon: "🗺️",
+          hint: "Odkryj 10 pól mapy.",
+          bonus: 50,
+          test: (s) => s.tiles.length >= 10,
+        },
+        {
+          id: "named",
+          name: "Kartograf",
+          icon: "📍",
+          hint: "Nazwij 3 odkryte miejsca.",
+          bonus: 30,
+          test: (s) => s.tiles.filter((t) => t.name).length >= 3,
+        },
+        {
+          id: "loot",
+          name: "Co jest w środku?",
+          icon: "📦",
+          hint: "Otwórz pierwszą skrzynię.",
+          bonus: 15,
+          test: (s) => s.opened >= 1,
+        },
+        {
+          id: "collect10",
+          name: "Kolekcjoner 10 przedmiotów",
+          icon: "💼",
+          hint: "Zdobądź 10 różnych przedmiotów.",
+          bonus: 75,
+          test: (s) => s.owned.length >= 10,
+        },
+        {
+          id: "legend",
+          name: "Pierwszy Legendarny",
+          icon: "🌟",
+          hint: "Zdobądź legendarny przedmiot.",
+          bonus: 80,
+          test: (s) => s.owned.some((id) => itemById(id).rarity === 3),
+        },
+        {
+          id: "mythic",
+          name: "Dotyk mitu",
+          icon: "👑",
+          hint: "Zdobądź mityczny przedmiot.",
+          bonus: 150,
+          test: (s) => s.owned.some((id) => itemById(id).rarity === 4),
+        },
+        {
+          id: "set",
+          name: "Pełny zestaw",
+          icon: "🧩",
+          hint: "Skompletuj dowolny zestaw.",
+          bonus: 100,
+          test: (s) => completeSets(s).length > 0,
+        },
+        {
+          id: "all",
+          name: "Muzeum życia",
+          icon: "💎",
+          hint: "Zdobądź wszystkie przedmioty.",
+          bonus: 500,
+          test: (s) => s.owned.length === ITEMS.length,
+        },
+        {
+          id: "categories",
+          name: "Człowiek renesansu",
+          icon: "🎭",
+          hint: "Zalicz misję z każdej kategorii.",
+          bonus: 60,
+          test: (s) => CATEGORIES.every((c) => s.categories.includes(c)),
+        },
+      ];
+      /* 06. Stan, defensywny odczyt i zapis */
+      const STORAGE_KEY = "lifemax-v1",
+        $ = (id) => document.getElementById(id),
+        itemById = (id) => ITEMS.find((i) => i.id === id);
+      const esc = (s) =>
+        String(s).replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      let storageOK = true,
+        tab = "missions",
+        selectedTile = 0,
+        filter = "all",
+        opening = false,
+        toastTimer;
+      function localDay(date = new Date()) {
+        return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+      }
+      function previousDay() {
+        const d = new Date();
+        d.setDate(d.getDate() - 1);
+        return localDay(d);
+      }
+      function fresh() {
+        return {
+          version: 1,
+          nick: "Nowy Odkrywca",
+          xp: 0,
+          streak: 0,
+          bestStreak: 0,
+          lastActive: "",
+          completed: 0,
+          hard: 0,
+          perfectDays: 0,
+          categories: [],
+          owned: [],
+          showcase: [],
+          dust: 0,
+          opened: 0,
+          chests: [0, 0, 0],
+          badges: [],
+          tiles: [],
+          daily: null,
+        };
+      }
+      function safeNumber(v, fallback = 0) {
+        return Number.isFinite(v) && v >= 0 ? Math.floor(v) : fallback;
+      }
+      function load() {
+        let raw;
+        try {
+          raw = localStorage.getItem(STORAGE_KEY);
+        } catch {
+          storageOK = false;
+          return fresh();
+        }
+        if (!raw) return fresh();
+        try {
+          const x = JSON.parse(raw);
+          if (!x || x.version !== 1 || typeof x !== "object") return fresh();
+          const s = fresh();
+          for (const k of [
+            "xp",
+            "streak",
+            "bestStreak",
+            "completed",
+            "hard",
+            "perfectDays",
+            "dust",
+            "opened",
+          ])
+            s[k] = safeNumber(x[k]);
+          s.nick =
+            typeof x.nick === "string"
+              ? x.nick.trim().slice(0, 24) || s.nick
+              : s.nick;
+          s.lastActive = typeof x.lastActive === "string" ? x.lastActive : "";
+          s.owned = [
+            ...new Set(
+              Array.isArray(x.owned)
+                ? x.owned.filter((id) => itemById(id))
+                : [],
+            ),
+          ];
+          s.showcase = [
+            ...new Set(
+              Array.isArray(x.showcase)
+                ? x.showcase.filter((id) => s.owned.includes(id))
+                : [],
+            ),
+          ].slice(0, 3);
+          s.badges = [
+            ...new Set(
+              Array.isArray(x.badges)
+                ? x.badges.filter((id) => BADGES.some((b) => b.id === id))
+                : [],
+            ),
+          ];
+          s.categories = Array.isArray(x.categories)
+            ? x.categories.filter((c) => CATEGORIES.includes(c))
+            : [];
+          s.chests = [0, 1, 2].map((i) => safeNumber(x.chests?.[i]));
+          s.tiles = Array.isArray(x.tiles)
+            ? x.tiles
+                .slice(0, 1000)
+                .map((t) => ({
+                  name: typeof t?.name === "string" ? t.name.slice(0, 50) : "",
+                  note: typeof t?.note === "string" ? t.note.slice(0, 300) : "",
+                  date: typeof t?.date === "string" ? t.date : localDay(),
+                  mission:
+                    typeof t?.mission === "string"
+                      ? t.mission
+                      : "Aklimatyzacja",
+                }))
+            : [];
+          if (
+            x.daily &&
+            typeof x.daily.date === "string" &&
+            Array.isArray(x.daily.missions) &&
+            x.daily.missions.length === 3 &&
+            x.daily.missions.every((m, d) =>
+              MISSIONS.some((q) => q.id === m?.id && q.difficulty === d),
+            )
+          )
+            s.daily = {
+              date: x.daily.date,
+              rerolled: !!x.daily.rerolled,
+              missions: x.daily.missions.map((m) => ({
+                id: m.id,
+                done: !!m.done,
+              })),
+            };
+          return s;
+        } catch {
+          return fresh();
+        }
+      }
+      let state = load();
+      function save() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          storageOK = true;
+        } catch {
+          storageOK = false;
+        }
+        $("storageWarning").hidden = storageOK;
+      }
+      function pickMission(d, exclude) {
+        const pool = MISSIONS.filter(
+          (m) => m.difficulty === d && m.id !== exclude,
+        );
+        return pool[Math.floor(Math.random() * pool.length)];
+      }
+      function ensureDay() {
+        const today = localDay();
+        let changed = false;
+        if (!state.daily || state.daily.date !== today) {
+          state.daily = {
+            date: today,
+            rerolled: false,
+            missions: [0, 1, 2].map((d) => ({
+              id: pickMission(d).id,
+              done: false,
+            })),
+          };
+          changed = true;
+        }
+        if (
+          state.lastActive !== today &&
+          state.lastActive !== previousDay() &&
+          state.streak !== 0
+        ) {
+          state.streak = 0;
+          changed = true;
+        }
+        if (changed) save();
+        return changed;
+      }
+      function completeSets(s = state) {
+        return SETS.filter((set) =>
+          ITEMS.filter((i) => i.set === set.id).every((i) =>
+            s.owned.includes(i.id),
+          ),
+        );
+      }
+      function cp(s = state) {
+        return (
+          s.xp +
+          s.owned.reduce(
+            (n, id) => n + RARITIES[itemById(id).rarity].value,
+            0,
+          ) +
+          completeSets(s).reduce((n, set) => n + set.bonus, 0) +
+          BADGES.filter((b) => s.badges.includes(b.id)).reduce(
+            (n, b) => n + b.bonus,
+            0,
+          )
+        );
+      }
+      function level() {
+        return [...LEVELS].reverse().find((l) => state.xp >= l.xp);
+      }
+      function rank() {
+        return [...RANKS].reverse().find((r) => cp() >= r.cp);
+      }
+      function awardBadges() {
+        const earned = [];
+        for (const b of BADGES)
+          if (!state.badges.includes(b.id) && b.test(state)) {
+            state.badges.push(b.id);
+            earned.push(b.name);
+          }
+        return earned;
+      }
+      function notify(text) {
+        clearTimeout(toastTimer);
+        $("toast").textContent = text;
+        $("toast").hidden = false;
+        toastTimer = setTimeout(() => ($("toast").hidden = true), 4200);
+      }
+      function confetti() {
+        if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        for (let i = 0; i < 45; i++) {
+          const e = document.createElement("i");
+          e.className = "confetti";
+          e.style.cssText = `left:${Math.random() * 100}%;background:${["#ccff76", "#ac95ff", "#ffcf73", "#83d8ef"][i % 4]};animation-delay:${Math.random() * 0.3}s;--dx:${Math.random() * 200 - 100}px`;
+          document.body.append(e);
+          setTimeout(() => e.remove(), 2000);
+        }
+      }
+      /* 07. Reguły rozgrywki */
+      function finishMission(index) {
+        if (ensureDay()) {
+          render();
+          notify(
+            "Zaczął się nowy dzień. Sprawdź nowe misje przed zaliczeniem.",
+          );
+          return;
+        }
+        const entry = state.daily.missions[index];
+        if (!entry || entry.done) return;
+        const m = MISSIONS.find((m) => m.id === entry.id);
+        let bonus = 0;
+        if (state.lastActive !== localDay()) {
+          state.streak =
+            state.lastActive === previousDay() ? state.streak + 1 : 1;
+          state.lastActive = localDay();
+          state.bestStreak = Math.max(state.bestStreak, state.streak);
+          bonus = Math.min(Math.max(0, state.streak - 1) * 5, 35);
+        }
+        entry.done = true;
+        state.xp += m.xp + bonus;
+        state.completed++;
+        if (m.difficulty === 2) state.hard++;
+        if (!state.categories.includes(m.category))
+          state.categories.push(m.category);
+        state.chests[m.difficulty]++;
+        state.tiles.push({
+          name: "",
+          note: "",
+          date: localDay(),
+          mission: m.title,
+        });
+        if (state.daily.missions.every((m) => m.done)) state.perfectDays++;
+        const badges = awardBadges();
+        save();
+        render();
+        document
+          .querySelector(`[data-complete="${index}"]`)
+          ?.closest(".mission")
+          ?.classList.add("done-animation");
+        confetti();
+        notify(
+          `+${m.xp + bonus} XP${bonus ? ` (w tym +${bonus} za serię)` : ""} · +1 skrzynia · odkryto pole${badges.length ? " · Nowa odznaka!" : ""}`,
+        );
+      }
+      function reroll() {
+        if (ensureDay()) {
+          render();
+          notify("Nowy dzień, nowy zestaw misji.");
+          return;
+        }
+        if (state.daily.rerolled) return;
+        const pending = state.daily.missions.filter((m) => !m.done);
+        if (!pending.length) return;
+        for (let d = 0; d < 3; d++) {
+          const entry = state.daily.missions[d];
+          if (!entry.done) entry.id = pickMission(d, entry.id).id;
+        }
+        state.daily.rerolled = true;
+        save();
+        render();
+        notify("Niezaliczone misje wylosowane ponownie. Kolejny reroll jutro.");
+      }
+      function rollItem(type) {
+        let r = Math.random() * 100,
+          rarity = 4;
+        for (let i = 0; i < 5; i++) {
+          r -= CHESTS[type].odds[i];
+          if (r < 0) {
+            rarity = i;
+            break;
+          }
+        }
+        const pool = ITEMS.filter((i) => i.rarity === rarity);
+        return pool[Math.floor(Math.random() * pool.length)];
+      }
+      function chestDialog(type) {
+        if (!state.chests[type]) return;
+        showModal(
+          `<div class="loot-modal"><div class="eyebrow">MAŁY KROK. WIELKI ŁUP.</div><h2>Skrzynia ${CHESTS[type].name.toLowerCase()}</h2><div class="loot-art" id="lootArt">${CHESTS[type].icon}</div><p class="muted" id="lootText">Twoja przygoda ma coś dla Ciebie.</p><button class="primary" id="openChest">Dotknij, aby otworzyć</button><div class="odds">${CHESTS[type].odds.map((o, i) => `${RARITIES[i].name}: ${o}%`).join(" · ")}<br>Duplikaty → pył: 3 / 6 / 12 / 25 / 50.</div></div>`,
+        );
+        $("openChest").onclick = () => openChest(type);
+      }
+      function openChest(type) {
+        if (opening || !state.chests[type]) return;
+        opening = true;
+        const item = rollItem(type),
+          duplicate = state.owned.includes(item.id),
+          dust = [3, 6, 12, 25, 50][item.rarity],
+          setsBefore = completeSets().length;
+        state.chests[type]--;
+        state.opened++;
+        if (duplicate) state.dust += dust;
+        else state.owned.push(item.id);
+        awardBadges();
+        save();
+        $("openChest").disabled = true;
+        $("openChest").textContent = "Otwieranie…";
+        $("lootArt").classList.add("shake");
+        setTimeout(() => {
+          opening = false;
+          const rarity = RARITIES[item.rarity];
+          $("modal").innerHTML =
+            `<div class="loot-modal" style="--rarity:${rarity.color}"><div class="eyebrow" style="color:${rarity.color}">${rarity.name.toUpperCase()}${duplicate ? " · DUPLIKAT" : " · NOWY PRZEDMIOT"}</div><div class="loot-art flash">${item.icon}</div><h2>${item.name}</h2><p class="muted">${item.lore}</p><p style="color:${rarity.color};margin-top:15px">${duplicate ? `+${dust} pyłu do wymiany na skrzynie` : `+${rarity.value} CP · dodano do kolekcji`}</p>${completeSets().length > setsBefore ? '<p style="color:var(--gold);margin-top:10px">✦ Pełny zestaw! Bonus CP został naliczony.</p>' : ""}<button class="primary" id="lootContinue">Ale łup! Kontynuuj</button></div>`;
+          $("lootContinue").onclick = closeModal;
+          render();
+          confetti();
+        }, 900);
+      }
+      function exchange(type) {
+        if (state.dust < CHESTS[type].cost) return;
+        state.dust -= CHESTS[type].cost;
+        state.chests[type]++;
+        save();
+        render();
+        notify(`Wymieniono pył · skrzynia ${CHESTS[type].name.toLowerCase()}`);
+      }
+      /* 08. Widoki i komponenty */
+      function title(eyebrow, name, subtitle, right = "") {
+        return `<div class="heading"><div><div class="eyebrow" style="margin-bottom:8px">${eyebrow}</div><h1>${name}</h1><p>${subtitle}</p></div>${right}</div>`;
+      }
+      function itemCard(item, owned = state.owned.includes(item.id)) {
+        const r = RARITIES[item.rarity];
+        return `<button class="item ${owned ? "owned" : "locked"} ${item.rarity === 4 ? "mythic" : ""}" style="--rarity:${r.color}" data-item="${item.id}" aria-label="${owned ? item.name : "Nieodkryty przedmiot"}"><span class="art" aria-hidden="true">${item.icon}</span><span class="name">${owned ? item.name : "???"}</span><span class="rarity">${owned ? r.name : "NIEODKRYTE"}</span></button>`;
+      }
+      function chestPanel() {
+        return `<section class="panel"><div class="chest-row"><span class="chest-symbol">🎁</span><div><h3>Twoje łupy czekają</h3><small>${state.chests.reduce((a, b) => a + b, 0)} skrzyń do otwarcia · ${state.dust} pyłu</small></div></div><div class="chests">${CHESTS.map((c, i) => `<button data-chest="${i}" ${!state.chests[i] ? "disabled" : ""}>${c.icon} ${c.name} <b>×${state.chests[i]}</b></button>`).join("")}</div></section>`;
+      }
+      function missionsView() {
+        const l = level(),
+          next = LEVELS[LEVELS.indexOf(l) + 1],
+          pct = next
+            ? Math.min(100, ((state.xp - l.xp) / (next.xp - l.xp)) * 100)
+            : 100,
+          done = state.daily.missions.filter((m) => m.done).length;
+        return (
+          title(
+            "TWÓJ CODZIENNY SIDEQUEST",
+            "Wyjdź po więcej.",
+            "Najlepsze historie zaczynają się poza ekranem.",
+            `<span class="pill">SEZON 01 · TWOJA HISTORIA</span>`,
+          ) +
+          `<section class="panel hero"><div><div class="eyebrow">POZIOM ${LEVELS.indexOf(l) + 1} / 6</div><h2>${l.name}</h2><small>${next ? `Następny przystanek: ${next.name}` : "Najwyższy poziom. Twoja historia trwa dalej."}</small></div><div><div class="xp-num">${state.xp}<span style="font-size:13px;color:var(--muted)"> XP</span></div><small>${next ? `/ ${next.xp} XP` : "LIFEMAX MODE"}</small></div><div style="grid-column:1/-1"><div class="progress"><i style="width:${pct}%"></i></div><div class="spread"><small>${next ? `${next.xp - state.xp} XP do kolejnego poziomu` : "Każda misja nadal zwiększa CP"}</small><small>${Math.round(pct)}%</small></div></div></section><div class="stats-row"><div class="stat"><small>🔥 SERIA DNI</small><strong>${state.streak}<small> ${state.streak === 1 ? "dzień" : "dni"}</small></strong></div><div class="stat"><small>✦ CLOUT POINTS</small><strong style="color:var(--gold)">${cp()}</strong></div><div class="stat"><small>⬡ ODKRYTE POLA</small><strong>${state.tiles.length}</strong></div></div><div class="section-title"><h2>Misje na dziś <span class="muted" style="font-size:12px">${done}/3</span></h2><button class="ghost" id="reroll" ${state.daily.rerolled || done === 3 ? "disabled" : ""}>⟳ ${state.daily.rerolled ? "Wykorzystano reroll" : "Losuj ponownie · 1 gratis"}</button></div><div class="missions">${state.daily.missions
+            .map((entry, i) => {
+              const m = MISSIONS.find((m) => m.id === entry.id);
+              return `<article class="panel mission ${entry.done ? "complete" : ""}"><span class="difficulty" style="color:${["var(--lime)", "var(--purple)", "var(--gold)"][i]}">${["ŁATWA", "ŚREDNIA", "TRUDNA"][i]}</span><div class="icon">${["🌿", "🪐", "🔥"][i]}</div><div class="category">${m.category}</div><h3>${m.title}</h3><p>${m.description}</p><footer><div class="reward"><b>+${m.xp} XP</b><span>${CHESTS[i].icon} ${CHESTS[i].name}</span></div><button class="primary" data-complete="${i}" ${entry.done ? "disabled" : ""}>${entry.done ? "✓ Zaliczone" : "Zaliczone!"}</button></footer></article>`;
+            })
+            .join(
+              "",
+            )}</div><p class="daily-note">↻ Nowe misje za <b id="countdown">—</b> · lokalna północ<br>Seria rośnie za pierwszą misję dnia. Bonus: +5 XP za kolejny dzień, maks. +35 XP.<br>Dbaj o granice swoje i innych. To przygoda, nie presja.</p>${chestPanel()}`
+        );
+      }
+      function collectionView() {
+        const visible = ITEMS.filter(
+          (i) =>
+            filter === "all" ||
+            (filter === "owned" && state.owned.includes(i.id)) ||
+            String(i.rarity) === filter,
+        );
+        return (
+          title(
+            "TWOJE MAŁE TROFEA",
+            "Kolekcja",
+            `${state.owned.length} / ${ITEMS.length} odkrytych przedmiotów · każdy ma swoją historię`,
+          ) +
+          chestPanel() +
+          `<div class="section-title"><h2>Gablotka odkryć</h2><div class="inventory-tools"><select id="filter" aria-label="Filtr kolekcji"><option value="all">Wszystkie</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Zdobyte</option>${RARITIES.map((r, i) => `<option value="${i}" ${filter === String(i) ? "selected" : ""}>${r.name}</option>`).join("")}</select></div></div><div class="grid">${visible.map((i) => itemCard(i)).join("")}</div>${!visible.length ? '<p class="daily-note">Jeszcze tu pusto. Pierwsza misja to pierwsza skrzynia.</p>' : ""}<div class="section-title"><h2>Zestawy z historią</h2><small>Bonus CP za komplet</small></div><div class="set-list">${SETS.map(
+            (set) => {
+              const count = ITEMS.filter(
+                (i) => i.set === set.id && state.owned.includes(i.id),
+              ).length;
+              return `<div class="set-card"><div class="spread"><b>${set.icon} ${set.name}</b><span style="color:var(--gold);font-size:12px">+${set.bonus} CP</span></div><p>${count}/5 przedmiotów ${count === 5 ? "· ✓ Bonus aktywny" : "· odkryj cały zestaw"}</p><div class="progress"><i style="width:${count * 20}%"></i></div></div>`;
+            },
+          ).join(
+            "",
+          )}</div><div class="section-title"><h2>Warsztat pyłu</h2><span class="pill">✧ ${state.dust} PYŁU</span></div><p class="muted" style="font-size:12px;margin-bottom:12px">Duplikaty zamieniają się w pył. Wybierz skrzynię do wymiany.</p><div class="chests">${CHESTS.map((c, i) => `<button data-exchange="${i}" ${state.dust < c.cost ? "disabled" : ""}>${c.icon} ${c.name} · ${c.cost} pyłu</button>`).join("")}</div>`
+        );
+      }
+      function mapCells() {
+        const count = Math.max(37, state.tiles.length + 7),
+          cells = [{ q: 0, r: 0 }];
+        for (let radius = 1; cells.length < count; radius++) {
+          let q = -radius,
+            r = radius;
+          for (const [dq, dr] of [
+            [1, 0],
+            [1, -1],
+            [0, -1],
+            [-1, 0],
+            [-1, 1],
+            [0, 1],
+          ])
+            for (let s = 0; s < radius; s++) {
+              cells.push({ q, r });
+              q += dq;
+              r += dr;
+            }
+        }
+        return cells.slice(0, count);
+      }
+      function mapView() {
+        const cells = mapCells(),
+          size = 24,
+          points = cells.map((c) => ({
+            x: size * Math.sqrt(3) * (c.q + c.r / 2),
+            y: size * 1.5 * c.r,
+          })),
+          minX = Math.min(...points.map((p) => p.x)) - 28,
+          minY = Math.min(...points.map((p) => p.y)) - 28,
+          maxX = Math.max(...points.map((p) => p.x)) + 28,
+          maxY = Math.max(...points.map((p) => p.y)) + 28;
+        const tile = state.tiles[selectedTile];
+        return (
+          title(
+            "ŚWIAT CZEKA ZA DRZWIAMI",
+            "Mapa odkryć",
+            `${state.tiles.length} odkrytych pól · każda misja odsłania nowe miejsce`,
+          ) +
+          `<div class="map-wrap"><svg viewBox="${minX} ${minY} ${maxX - minX} ${maxY - minY}" role="group" aria-label="Mapa heksagonów">${points
+            .map((p, i) => {
+              const revealed = i < state.tiles.length;
+              return `<g><polygon class="hex ${revealed ? "revealed" : ""} ${i === selectedTile && tile ? "selected" : ""}" points="${Array.from(
+                { length: 6 },
+                (_, j) => {
+                  const angle = ((60 * j - 30) * Math.PI) / 180;
+                  return `${p.x + size * Math.cos(angle)},${p.y + size * Math.sin(angle)}`;
+                },
+              ).join(
+                " ",
+              )}" data-tile="${i}" tabindex="0" role="button" aria-label="${revealed ? esc(state.tiles[i].name || `Odkryte pole ${i + 1}`) : "Pole we mgle"}"/><text x="${p.x}" y="${p.y + 5}" text-anchor="middle" font-size="13" fill="${revealed ? "#e9ffca" : "#64718b"}" pointer-events="none">${revealed ? (state.tiles[i].name ? "⚑" : "✦") : "·"}</text></g>`;
+            })
+            .join(
+              "",
+            )}</svg></div><div class="map-detail panel">${tile ? `<div class="eyebrow">POLE ${selectedTile + 1} · ${esc(tile.date)}</div><h2 style="margin:8px 0">${esc(tile.name || "Miejsce czeka na nazwę")}</h2><small>Odkryte dzięki misji: ${esc(tile.mission)}</small><form id="mapForm"><label for="placeName">Nazwa miejsca</label><input id="placeName" maxlength="50" placeholder="np. Park przy starej bibliotece" value="${esc(tile.name)}"><label for="placeNote">Twoja notatka</label><textarea id="placeNote" maxlength="300" placeholder="Co chcesz zapamiętać?">${esc(tile.note)}</textarea><button class="primary">Zapisz wspomnienie</button></form>` : '<h2>Twoja mapa jest jeszcze we mgle.</h2><p class="muted" style="margin-top:10px">Zalicz pierwszą misję i odkryj pole. Potem nadaj mu nazwę prawdziwego miejsca i zapisz wspomnienie.</p>'}</div><p class="daily-note">To Twoja symboliczna mapa przygód, bez GPS i śledzenia lokalizacji.</p>`
+        );
+      }
+      function badgesView() {
+        return (
+          title(
+            "DOWODY, ŻE DZIAŁASZ",
+            "Odznaki",
+            `${state.badges.length} / ${BADGES.length} zdobytych · odblokowuj je po swojemu`,
+          ) +
+          `<div class="badges">${BADGES.map((b) => `<article class="badge ${state.badges.includes(b.id) ? "earned" : ""}" title="${esc(b.hint)}"><span aria-hidden="true">${b.icon}</span><div><b>${b.name}</b><small>${b.hint}</small><small style="color:${state.badges.includes(b.id) ? "var(--gold)" : "var(--muted)"}">${state.badges.includes(b.id) ? "✓ Zdobyta" : "🔒 Do odkrycia"} · +${b.bonus} CP</small></div></article>`).join("")}</div>`
+        );
+      }
+      function profileView() {
+        const r = rank(),
+          l = level();
+        return (
+          title(
+            "NIECH WYNIK MÓWI ZA CIEBIE",
+            "Twój flex",
+            "Zrób screena. Podziel się historią. Zainspiruj ekipę.",
+          ) +
+          `<section class="flex-card" id="flexCard"><div class="spread"><div class="eyebrow">LIFEMAX / KARTA ODKRYWCY</div><span style="font-size:22px;color:#ccff76">✦</span></div><div style="display:flex;gap:15px;align-items:center;margin-top:25px"><div class="avatar">${esc(state.nick.slice(0, 1).toUpperCase())}</div><div><h2 class="profile-name">${esc(state.nick)}</h2><span class="rank" style="color:${r.color}">◆ ${r.name.toUpperCase()}</span><small> · ${l.name}</small></div></div><div class="cp-display">${cp().toLocaleString("pl-PL")} <span>CP</span></div><small>CLOUT POINTS · ZDOBYTE W PRAWDZIWYM ŻYCIU</small><div class="flex-stats"><div><b>${state.streak} 🔥</b><small>seria dni</small></div><div><b>${state.tiles.length}</b><small>odkryte pola</small></div><div><b>${state.owned.length}/${ITEMS.length}</b><small>kolekcja</small></div></div><div class="eyebrow" style="color:#acb9d2">MOJE TROFEA</div><div class="showcase">${[
+            0, 1, 2,
+          ]
+            .map((i) => {
+              const item = itemById(state.showcase[i]);
+              return item
+                ? itemCard(item, true)
+                : '<div class="item empty" aria-label="Puste miejsce wystawy">＋</div>';
+            })
+            .join(
+              "",
+            )}</div><div class="spread"><span class="logo" style="font-size:18px">life<b style="color:#ccff76">max</b></span><small>ŻYJ. ODKRYWAJ. POWTARZAJ.</small></div></section><div class="profile-actions"><button class="primary" id="copyResult">↗ Kopiuj tekst wyniku</button><button class="ghost" id="editProfile">Edytuj kartę</button></div><section class="panel edit-panel" id="profileEditor" hidden><h2>Twoja tożsamość</h2><form id="profileForm"><label for="nickname" style="display:block;margin:15px 0 6px">Nick</label><input id="nickname" maxlength="24" required value="${esc(state.nick)}"><p class="muted" style="font-size:12px;margin-top:17px">Wybierz do 3 zdobytych przedmiotów na wystawę. Kliknij ponownie, aby odznaczyć.</p><div class="choose-grid" id="showcasePicker">${
+            state.owned
+              .map((id) => {
+                const i = itemById(id);
+                return `<button type="button" data-showcase="${id}" title="${i.name}" aria-label="${i.name}" aria-pressed="${state.showcase.includes(id)}" class="${state.showcase.includes(id) ? "selected" : ""}">${i.icon}</button>`;
+              })
+              .join("") ||
+            "<small>Najpierw otwórz skrzynię, aby zdobyć trofeum.</small>"
+          }</div><button class="primary">Zapisz nick</button></form></section><div class="panel edit-panel"><h3>Skąd biorą się CP?</h3><p class="muted" style="font-size:12px;margin-top:8px">${state.xp} XP + ${state.owned.reduce((n, id) => n + RARITIES[itemById(id).rarity].value, 0)} za unikalne przedmioty + ${completeSets().reduce((n, s) => n + s.bonus, 0)} za zestawy + ${BADGES.filter((b) => state.badges.includes(b.id)).reduce((n, b) => n + b.bonus, 0)} za odznaki. Duplikaty dają pył, nie dodatkową wartość przedmiotu.</p><p class="muted" style="font-size:11px;margin-top:10px">Rangi: Brąz 0 · Srebro 300 · Złoto 1000 · Diament 2500 · Mityczny 5000 CP.</p></div><div class="profile-actions"><button class="ghost danger-button" id="reset">Wyzeruj wszystkie postępy</button></div><details class="help"><summary>Jak dodawać własne treści?</summary><p><b>Misje:</b> dopisz parę [tytuł, opis] w MISSION_TEXTS. Trzy tablice to poziomy trudności 10/25/50 XP; kategorie przypisuje Math.floor(i/4). Dla większych baz możesz dopisywać obiekty bezpośrednio do MISSIONS z unikalnym id, difficulty 0–2, category, title, description i xp.</p><p><b>Przedmioty:</b> dodaj obiekt do ITEMS z unikalnym id, set (id zestawu), rarity 0–4, name, icon i lore. Nowy zestaw dodaj do SETS z id, name, icon i bonus. Nie zmieniaj istniejących identyfikatorów, bo są używane w zapisie.</p><p><b>Odznaki:</b> dodaj do BADGES obiekt z id, name, icon, hint, bonus i funkcją test(s), która sprawdza stan. XP, CP, dropy i bonusy skonfigurujesz w LEVELS, RANKS, RARITIES i CHESTS. Wszystko znajduje się w tym jednym pliku HTML.</p></details>`
+        );
+      }
+      function render() {
+        ensureDay();
+        $("storageWarning").hidden = storageOK;
+        $("headerStreak").textContent = `🔥 ${state.streak} dni`;
+        $("avatar").textContent = state.nick[0].toUpperCase();
+        $("content").innerHTML = {
+          missions: missionsView,
+          map: mapView,
+          collection: collectionView,
+          badges: badgesView,
+          profile: profileView,
+        }[tab]();
+        document.querySelectorAll("[data-tab]").forEach((b) => {
+          b.classList.toggle("active", b.dataset.tab === tab);
+          b.setAttribute(
+            "aria-current",
+            b.dataset.tab === tab ? "page" : "false",
+          );
+        });
+        bindView();
+        updateCountdown();
+      }
+      /* 09. Interakcje, dialogi i bezpieczne kopiowanie */
+      function showModal(html) {
+        $("modal").innerHTML =
+          `<button class="dialog-close" id="closeModal" aria-label="Zamknij">×</button>${html}`;
+        $("closeModal").onclick = closeModal;
+        if (!$("modal").open) $("modal").showModal();
+      }
+      function closeModal() {
+        if (opening) return;
+        $("modal").close();
+      }
+      $("modal").addEventListener("cancel", (e) => {
+        if (opening) e.preventDefault();
+      });
+      function showItem(id) {
+        const item = itemById(id),
+          owned = state.owned.includes(id),
+          r = RARITIES[item.rarity];
+        showModal(
+          `<div class="loot-modal" style="--rarity:${r.color}"><div class="loot-art" style="${owned ? "" : "filter:grayscale(1) brightness(.3)"}">${item.icon}</div><div class="eyebrow" style="color:${r.color}">${r.name}</div><h2>${owned ? item.name : "Nieodkryty przedmiot"}</h2><p class="muted">${owned ? item.lore : "Ukrywa się w skrzyniach. Każda misja to kolejna szansa."}</p><p class="muted" style="margin-top:14px">Zestaw ${SETS.find((s) => s.id === item.set).name} · ${r.value} CP</p></div>`,
+        );
+      }
+      async function copyResult() {
+        const text = `✦ LIFEMAX | ${state.nick}\n◆ ${rank().name} · ${cp()} CP · ${level().name}\n🔥 Seria: ${state.streak} dni | ⬡ Odkryte pola: ${state.tiles.length}\n◈ Kolekcja: ${state.owned.length}/${ITEMS.length} | Misje: ${state.completed}\n${state.showcase.map((id) => itemById(id).icon + " " + itemById(id).name).join(" · ")}\nMniej scrollowania. Więcej historii.`;
+        try {
+          if (!navigator.clipboard?.writeText) throw new Error();
+          await navigator.clipboard.writeText(text);
+          notify("Wynik skopiowany. Czas na mały flex!");
+        } catch {
+          showModal(
+            `<h2 style="margin-top:12px">Twój wynik do skopiowania</h2><p class="muted" style="font-size:12px;margin:14px 0">Przeglądarka nie udostępniła schowka. Zaznacz tekst i skopiuj ręcznie.</p><textarea id="copyFallback" readonly style="height:210px">${esc(text)}</textarea>`,
+          );
+          $("copyFallback").focus();
+          $("copyFallback").select();
+        }
+      }
+      function bindView() {
+        document
+          .querySelectorAll("[data-complete]")
+          .forEach(
+            (b) =>
+              (b.onclick = () => finishMission(Number(b.dataset.complete))),
+          );
+        if ($("reroll")) $("reroll").onclick = reroll;
+        document
+          .querySelectorAll("[data-chest]")
+          .forEach(
+            (b) => (b.onclick = () => chestDialog(Number(b.dataset.chest))),
+          );
+        document
+          .querySelectorAll("[data-exchange]")
+          .forEach(
+            (b) => (b.onclick = () => exchange(Number(b.dataset.exchange))),
+          );
+        document
+          .querySelectorAll("[data-item]")
+          .forEach((b) => (b.onclick = () => showItem(b.dataset.item)));
+        document.querySelectorAll("[data-tile]").forEach((b) => {
+          const action = () => {
+            const i = Number(b.dataset.tile);
+            if (i >= state.tiles.length) {
+              notify("To pole jest we mgle. Odkryjesz je, zaliczając misję.");
+              return;
+            }
+            selectedTile = i;
+            render();
+          };
+          b.onclick = action;
+          b.onkeydown = (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              action();
+            }
+          };
+        });
+        if ($("mapForm"))
+          $("mapForm").onsubmit = (e) => {
+            e.preventDefault();
+            const t = state.tiles[selectedTile];
+            t.name = $("placeName").value.trim();
+            t.note = $("placeNote").value.trim();
+            awardBadges();
+            save();
+            render();
+            notify("Wspomnienie zapisane");
+          };
+        if ($("copyResult")) $("copyResult").onclick = copyResult;
+        if ($("editProfile"))
+          $("editProfile").onclick = () => {
+            $("profileEditor").hidden = !$("profileEditor").hidden;
+            if (!$("profileEditor").hidden) $("nickname").focus();
+          };
+        if ($("profileForm"))
+          $("profileForm").onsubmit = (e) => {
+            e.preventDefault();
+            const nick = $("nickname").value.trim();
+            if (!nick) {
+              $("nickname").setCustomValidity("Wpisz nick, nie same spacje.");
+              $("nickname").reportValidity();
+              return;
+            }
+            state.nick = nick.slice(0, 24);
+            save();
+            render();
+            notify("Karta zaktualizowana");
+          };
+        if ($("nickname"))
+          $("nickname").oninput = () => $("nickname").setCustomValidity("");
+        document.querySelectorAll("[data-showcase]").forEach(
+          (b) =>
+            (b.onclick = () => {
+              const id = b.dataset.showcase;
+              if (state.showcase.includes(id))
+                state.showcase = state.showcase.filter((x) => x !== id);
+              else if (state.showcase.length < 3) state.showcase.push(id);
+              else {
+                notify(
+                  "Na wystawie mieszczą się 3 trofea. Najpierw odznacz jedno.",
+                );
+                return;
+              }
+              save();
+              b.classList.toggle("selected", state.showcase.includes(id));
+              b.setAttribute(
+                "aria-pressed",
+                String(state.showcase.includes(id)),
+              );
+              const oldNick = $("nickname").value;
+              const editorOpen = !$("profileEditor").hidden;
+              render();
+              $("profileEditor").hidden = !editorOpen;
+              $("nickname").value = oldNick;
+            }),
+        );
+        if ($("reset"))
+          $("reset").onclick = () => {
+            showModal(
+              '<h2 style="margin-top:18px">Zacząć od nowa?</h2><p class="muted" style="margin:15px 0">Usuniesz XP, kolekcję, skrzynie, mapę i wszystkie odznaki z tej przeglądarki. Tej operacji nie można cofnąć.</p><div class="profile-actions"><button class="ghost" id="cancelReset">Zachowaj postępy</button><button class="primary" id="confirmReset">Tak, usuń wszystko</button></div>',
+            );
+            $("cancelReset").onclick = closeModal;
+            $("confirmReset").onclick = () => {
+              state = fresh();
+              selectedTile = 0;
+              filter = "all";
+              ensureDay();
+              save();
+              closeModal();
+              tab = "missions";
+              render();
+              notify("Czysta karta. Nowa przygoda czeka.");
+            };
+          };
+      }
+      function navigate(next) {
+        tab = next;
+        render();
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }
+      document
+        .querySelectorAll("[data-tab]")
+        .forEach((b) => (b.onclick = () => navigate(b.dataset.tab)));
+      $("avatar").onclick = () => navigate("profile");
+      /* 10. Zegar: lokalna północ, również po powrocie do karty */
+      function updateCountdown() {
+        if (!$("countdown")) return;
+        const now = new Date(),
+          midnight = new Date(now);
+        midnight.setHours(24, 0, 0, 0);
+        const s = Math.max(0, Math.floor((midnight - now) / 1000));
+        $("countdown").textContent =
+          `${String(Math.floor(s / 3600)).padStart(2, "0")}:${String(Math.floor(s / 60) % 60).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
+      }
+      setInterval(() => {
+        if (ensureDay()) render();
+        else updateCountdown();
+      }, 1000);
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) {
+          ensureDay();
+          render();
+        }
+      });
+      ensureDay();
+      awardBadges();
+      save();
+      render();
+    </script>
+  </body>
+</html>
